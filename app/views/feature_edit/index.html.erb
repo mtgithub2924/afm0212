@@ -1,0 +1,161 @@
+<style>
+  .container-fluid .subject {
+    margin: 10px 20px;
+    padding: 0px;
+  }
+  .container-fluid .scope {
+    margin: 30px 0px 0px 20px;
+    padding: 0px;
+  }
+  .container-fluid .list {
+    margin: 0px 20px;
+    padding: 0px;
+  }
+  .container-fluid .note {
+    margin: 0px 0px 0px 20px;
+    padding: 0px;
+  }
+</style>
+
+<script type="text/javascript">
+  var feature_data = [
+    {scope:"P", scope_code:"", scope_name:"", key1:"feature:.oexmg", key1f:"Y", key2:"", key2f:"N", key3:"", key3f:"N", key4:"Y", key4f:"Y"},
+    {scope:"A", scope_code:"APCI", scope_name:"APCI", key1:"feature:.oexmg", key1f:"N", key2:"", key2f:"N", key3:"", key3f:"N", key4:"Y", key4f:"N"},
+    {scope:"B", scope_code:"AJI001", scope_name:"AJI001", key1:"feature:.nexmg", key1f:"Y", key2:"", key2f:"N", key3:"", key3f:"N", key4:"Y", key4f:"Y"},
+    {scope:"C", scope_code:"603668", scope_name:"味の素製薬株式会社", key1:"feature:.nexmg", key1f:"N", key2:"", key2f:"N", key3:"MRZ_POUT<br>RS_POUT_SEI<br>C1S_POUT_SEI<br>MISUMI_POUT_SEI<br>BC_POUT_SEI<br>KNGCP_POUT_SEI<br>KNKY_POUT<br>AMZ_POUT<br>TSH_POUT", key3f:"Y", key4:"Y", key4f:"N"},
+    {scope:"S", scope_code:"712434", scope_name:"創薬研究センター", key1:"feature:.nexmg", key1b:"feature:.nexmg", key1f:"N", key2:"712432", key2b:"712432", key2f:"Y", key3:"MRZ_POUT<br>RS_POUT_SEI<br>C1S_POUT_SEI<br>MISUMI_POUT_SEI<br>BC_POUT_SEI<br>KNGCP_POUT_SEI<br>KNKY_POUT<br>AMZ_POUT<br>TSH_POUT", key3b:"MRZ_POUT<br>RS_POUT_SEI<br>C1S_POUT_SEI<br>MISUMI_POUT_SEI<br>BC_POUT_SEI<br>KNGCP_POUT_SEI<br>KNKY_POUT<br>AMZ_POUT<br>TSH_POUT", key3f:"N", key4:"Y", key4b:"Y", key4f:"N", target:"Y"},
+  ];
+  var feature_data_bk = feature_data.concat();
+
+  var is_target = function(cell) {
+    var data = cell.getRow().getData();
+    return data.target == "Y";
+  };
+
+  var feature_columns = [
+    {title:"スコープ", field:"", align:"left", width:300, cssClass:"dark", headerSort:false, formatter:function(cell) {
+      var data = cell.getRow().getData();
+      if (data.scope == "P") return "<span class='font property'>規定値 - APMRO（本番環境）</span>";
+      if (data.scope == "A") return "<span class='font assign'>" + data.scope_code + "</span>";
+      if (data.scope == "B") return "<span class='font buyers'>" + data.scope_code + "</span>";
+      if (data.scope == "C") return "<span class='font customer'>" + data.scope_code + " " + data.scope_name + "</span>";
+      if (data.scope == "S") return "<span class='font site'>" + data.scope_code + " " + data.scope_name + "</span>";
+      if (data.scope == "U") return "<span class='font user'>" + data.scope_code + "</span>";
+    }},
+    {title:"ENDECA新規登録", columns:[
+      {title:"検索/検索エンジンURL<button type='button' class='btn info' onclick='javascript:open_feature_info_dialog(\"catalog.apf.url\")'>詳細</button><br>catalog.apf.url", field:"key1", align:"left", width:300, editor:"textarea", editable:is_target, headerSort:false, formatter:function(cell) {
+        var data = cell.getRow().getData();
+        var value = data.key1;
+        if (data.key1f == "N") value = "<span class='font notset'>" + data.key1 + "</span>";
+        if (data.key1b != null && data.key1 != data.key1b) value = "<span class='font edited'>" + data.key1 + "</span>";
+        return "<div class='val'>" + value + "</div>";
+      }},
+      {title:"見積/サイトグループ<button type='button' class='btn info' onclick='javascript:open_feature_info_dialog(\"organization.siteGroupCode\")'>詳細</button><br>organization.siteGroupCode", field:"key2", align:"left", width:300, editor:"textarea", editable:is_target, headerSort:false, formatter:function(cell) {
+        var data = cell.getRow().getData();
+        var value = data.key2;
+        if (data.key2f == "N") value = "<span class='font notset'>" + data.key2 + "</span>";
+        if (data.key2b != null && data.key2 != data.key2b) value = "<span class='font edited'>" + data.key2 + "</span>";
+        return "<div class='val'>" + value + "</div>";
+      }},
+      {title:"パンチアウト接続先リスト<button type='button' class='btn info' onclick='javascript:open_feature_info_dialog(\"opoutAllowCatalogList\")'>詳細</button><br>opoutAllowCatalogList", field:"key3", align:"left", width:300, editor:"textarea", editable:is_target, headerSort:false, formatter:function(cell) {
+        var data = cell.getRow().getData();
+        var value = data.key3;
+        if (data.key3f == "N") value = "<span class='font notset'>" + data.key3 + "</span>";
+        if (data.key3b != null && data.key3 != data.key3b) value = "<span class='font edited'>" + data.key3 + "</span>";
+        return "<div class='val'>" + value + "</div>";
+      }},
+      {title:"お気に入り<button type='button' class='btn info' onclick='javascript:open_feature_info_dialog(\"favorite\")'>詳細</button><br>favorite", field:"key4", align:"left", width:300, editor:"select", editorParams:{values:{"Y":"Y", "N":"N"}}, editable:is_target, headerSort:false, formatter:function(cell) {
+        var data = cell.getRow().getData();
+        var value = data.key4;
+        if (data.key4f == "N") value = "<span class='font notset'>" + data.key4 + "</span>";
+        if (data.key4b != null && data.key4 != data.key4b) value = "<span class='font edited'>" + data.key4 + "</span>";
+        return "<div class='val'>" + value + "</div>";
+      }},
+    ]},
+  ];
+
+  var row_format = function(row) {
+    var data = row.getData();
+    if (data.target == "Y") {
+      row.getElement().style.backgroundColor = "#eef";
+    }
+  };
+
+  var table;
+  var create_table = function() {
+    table = new Tabulator("#feature-table", {
+      data: feature_data,
+      columns: feature_columns,
+      tooltips: true,
+      selectable: false,
+      rowFormatter: row_format,
+    });
+  };
+
+  var open_feature_info_dialog = function(key) {
+    window.open("/feature_info/index?key=" + key, "AFM-FeatureInfo");
+  }
+
+  var save_edit = function() {
+    if (confirm("編集内容を保存します。宜しいですか？")) {
+      window.close();
+    }
+  }
+
+  var rollback_edit = function() {
+    if (confirm("編集内容を元に戻します。宜しいですか？")) {
+      feature_data = feature_data_bk.concat();
+      create_table();
+    }
+  }
+
+  $(function() {
+    create_table();
+  });
+</script>
+
+<!-- container-fluid -->
+<div class="container-fluid">
+
+<!-- subject -->
+<div class="subject">
+  <div class="row">
+    <p class="h1">機能パラメータ編集</p>
+    <div class="col-auto ml-sm-auto">
+    <button type="button" class="btn btn-outline-primary" id="btnSaveEdit" onclick="javascript: save_edit();">保存</button>
+    <button type="button" class="btn btn-outline-info" id="btnInitEdit" onclick="javascript: rollback_edit();">変更前に戻す</button>
+    <button type="button" class="btn btn-outline-secondary" onclick="javascript: window.close();">閉じる</button>
+    </div>
+  </div>
+</div>
+
+<!-- scope area -->
+<div class="scope">
+  <div class="row">
+    <span class='font assign'>APCI</span>&nbsp;&nbsp;＞&nbsp;&nbsp;
+    <span class='font buyers'>AJI001</span>&nbsp;&nbsp;＞&nbsp;&nbsp;
+    <span class='font customer'>603668 味の素製薬株式会社</span>&nbsp;&nbsp;＞&nbsp;&nbsp;
+    <span class='font site'>712434 創薬研究センター</span>
+  </div>
+</div>
+
+<!-- list area -->
+<div class="list">
+  <div class="row">
+    <div id="feature-table"></div>
+    <div id="feature-edit-table"></div>
+  </div>
+</div>
+
+<!-- note area -->
+<div class="note">
+  <div class="row">
+    <span class='font accent'>※ NULLで上書きする場合は #BLANK# を入力してください</span>
+  </div>
+  <div class="row">
+    <span class='font accent'>※ 複数値を入力する場合は &lt;br&gt; をセパレータとして入力してください</span>
+  </div>
+</div>
+
+</div>
+<!-- /container-fluid -->

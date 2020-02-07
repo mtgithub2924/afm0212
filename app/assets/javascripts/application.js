@@ -1,0 +1,12 @@
+// require_tree .
+//= require jquery-3.4.1
+//= require jquery-ui
+//= require popper
+//= require bootstrap
+//= require tabulator
+//= require datepicker
+//= require body
+//= require navigation
+//= require timepicker
+//= require datepicker.en
+//= require afm_common

@@ -1,0 +1,233 @@
+<style>
+  .btn.edit {
+    border-radius: 6px;
+    border-color: #fff;
+    background-color: #555;
+    color: red;
+    margin: 0px;
+    padding: 0px 12px;
+    font-size: 14px;
+  }
+  .btn.edit.closed {
+    color: #999;
+  }
+  .container-fluid .subject {
+    margin: 10px 20px;
+    padding: 0px;
+  }
+  .container-fluid .search {
+    border: 2px solid #ccc;
+    margin: 40px 40px;
+    padding: 20px 0px 10px 50px;
+    width: 1000px;
+  }
+  .container-fluid .operation {
+    margin: 0px 20px;
+    padding: 0px;
+  }
+  .container-fluid .list {
+    margin: 0px 20px;
+    padding: 0px;
+  }
+</style>
+
+<script type="text/javascript">
+  var feature_data = [
+    {scope:"P", scope_code:"", scope_name:"", key1:"feature:.nexmg", key1b:"feature:.nexmg", key1f:"Y", key2:"", key2b:"", key2f:"N", key3:"", key3b:"", key3f:"N", key4:"Y", key4b:"Y", key4f:"Y"},
+    {scope:"A", scope_code:"APCI", scope_name:"APCI", key1:"feature:.nexmg", key1b:"feature:.nexmg", key1f:"Y", key2:"", key2b:"", key2f:"N", key3:"", key3b:"", key3f:"N", key4:"Y", key4b:"Y", key4f:"Y"},
+    {scope:"B", scope_code:"AJI001", scope_name:"AJI001", key1:"feature:.nexmg", key1b:"feature:.nexmg", key1f:"Y", key2:"", key2b:"", key2f:"N", key3:"", key3b:"", key3f:"N", key4:"Y", key4b:"Y", key4f:"Y"},
+    {scope:"C", scope_code:"603668", scope_name:"味の素製薬株式会社", key1:"feature:.nexmg", key1b:"feature:.nexmg", key1f:"N", key2:"712432", key2b:"712432", key2f:"Y", key3:"", key3b:"", key3f:"N", key4:"Y", key4b:"Y", key4f:"N", "_children":[
+      {scope:"S", scope_code:"712434", scope_name:"創薬研究センター", key1:"feature:.nexmg", key1b:"feature:.nexmg", key1f:"N", key2:"712432", key2b:"712432", key2f:"N", key3:"", key3b:"", key3f:"N", key4:"N", key4b:"Y", key4f:"Y"},
+      {scope:"S", scope_code:"712435", scope_name:"埼玉工場", key1:"feature:.nexmg", key1b:"feature:.nexmg", key1f:"N", key2:"712432", key2b:"712432", key2f:"N", key3:"", key3b:"", key3f:"N", key4:"N", key4b:"Y", key4f:"Y"},
+      {scope:"S", scope_code:"712436", scope_name:"福島工場", key1:"feature:.nexmg", key1b:"feature:.nexmg", key1f:"N", key2:"712432", key2b:"712432", key2f:"N", key3:"", key3b:"", key3f:"N", key4:"N", key4b:"Y", key4f:"Y"},
+    ]},
+    {scope:"C", scope_code:"603670", scope_name:"味の素冷凍食品株式会社", key1:"feature:.nexmg", key1b:"feature:.nexmg", key1f:"N", key2:"712450", key2b:"712450", key2f:"Y", key3:"", key3b:"", key3f:"N", key4:"Y", key4b:"Y", key4f:"N", "_children":[
+      {scope:"S", scope_code:"712459", scope_name:"本社", key1:"feature:.nexmg", key1b:"feature:.nexmg", key1f:"N", key2:"712450", key2b:"712450", key2f:"N", key3:"", key3b:"", key3f:"N", key4:"N", key4b:"Y", key4f:"Y"},
+      {scope:"S", scope_code:"712460", scope_name:"関東工場", key1:"feature:.nexmg", key1b:"feature:.nexmg", key1f:"N", key2:"712450", key2b:"712450", key2f:"N", key3:"", key3b:"", key3f:"N", key4:"N", key4b:"Y", key4f:"Y"},
+      {scope:"S", scope_code:"712461", scope_name:"四国工場", key1:"feature:.nexmg", key1b:"feature:.nexmg", key1f:"N", key2:"712450", key2b:"712450", key2f:"N", key3:"", key3b:"", key3f:"N", key4:"N", key4b:"Y", key4f:"Y", closed:"Y"},
+    ]},
+    {scope:"C", scope_code:"603671", scope_name:"カルピス株式会社", key1:"feature:.nexmg", key1b:"feature:.nexmg", key1f:"N", key2:"", key2b:"", key2f:"N", key3:"MRZ_POUT<br>RS_POUT_SEI<br>C1S_POUT_SEI<br>MISUMI_POUT_SEI<br>BC_POUT_SEI<br>KNGCP_POUT_SEI<br>KNKY_POUT<br>AMZ_POUT<br>TSH_POUT", key3b:"MRZ_POUT<br>RS_POUT_SEI<br>C1S_POUT_SEI<br>MISUMI_POUT_SEI<br>BC_POUT_SEI<br>KNGCP_POUT_SEI<br>KNKY_POUT<br>AMZ_POUT<br>TSH_POUT", key3f:"Y", key4:"Y", key4b:"Y", key4f:"N", "_children":[
+      {scope:"S", scope_code:"712464", scope_name:"本社", key1:"feature:.rexmg", key1b:"feature:.nexmg", key1f:"N", key2:"712460", key2b:"712460", key2f:"Y", key3:"MRZ_POUT<br>RS_POUT_SEI<br>C1S_POUT_SEI<br>MISUMI_POUT_SEI<br>BC_POUT_SEI<br>KNGCP_POUT_SEI<br>KNKY_POUT<br>AMZ_POUT<br>TSH_POUT", key3b:"MRZ_POUT<br>RS_POUT_SEI<br>C1S_POUT_SEI<br>MISUMI_POUT_SEI<br>BC_POUT_SEI<br>KNGCP_POUT_SEI<br>KNKY_POUT<br>AMZ_POUT<br>TSH_POUT", key3f:"N", key4:"Y", key4b:"Y", key4f:"N"},
+      {scope:"S", scope_code:"712465", scope_name:"相模原研究所", key1:"feature:.nexmg", key1b:"feature:.nexmg", key1f:"N", key2:"712460", key2b:"712460", key2f:"Y", key3:"MRZ_POUT<br>RS_POUT_SEI<br>C1S_POUT_SEI<br>MISUMI_POUT_SEI<br>BC_POUT_SEI<br>KNGCP_POUT_SEI<br>KNKY_POUT<br>AMZ_POUT<br>TSH_POUT", key3b:"MRZ_POUT<br>RS_POUT_SEI<br>C1S_POUT_SEI<br>MISUMI_POUT_SEI<br>BC_POUT_SEI<br>KNGCP_POUT_SEI<br>KNKY_POUT<br>AMZ_POUT<br>TSH_POUT", key3f:"N", key4:"Y", key4b:"Y", key4f:"N"},
+      {scope:"U", scope_code:"GUEST-001", scope_name:"", key1:"feature:.rexmg", key1b:"feature:.rexmg", key1f:"Y", key2:"712465", key2b:"712465", key2f:"Y", key3:"MRZ_POUT<br>RS_POUT_SEI<br>C1S_POUT_SEI<br>MISUMI_POUT_SEI<br>BC_POUT_SEI<br>KNGCP_POUT_SEI<br>KNKY_POUT<br>AMZ_POUT<br>TSH_POUT", key3b:"MRZ_POUT<br>RS_POUT_SEI<br>C1S_POUT_SEI<br>MISUMI_POUT_SEI<br>BC_POUT_SEI<br>KNGCP_POUT_SEI<br>KNKY_POUT<br>AMZ_POUT<br>TSH_POUT", key3f:"N", key4:"Y", key4b:"Y", key4f:"N"},
+      {scope:"S", scope_code:"712466", scope_name:"岡山工場", key1:"feature:.nexmg<br>feature:.oexmg", key1b:"feature:.nexmg<br>feature:.oexmg", key1f:"Y", key2:"712460", key2b:"712460", key2f:"Y", key3:"MRZ_POUT<br>RS_POUT_SEI<br>C1S_POUT_SEI<br>MISUMI_POUT_SEI<br>BC_POUT_SEI<br>KNGCP_POUT_SEI<br>KNKY_POUT<br>AMZ_POUT<br>TSH_POUT", key3b:"MRZ_POUT<br>RS_POUT_SEI<br>C1S_POUT_SEI<br>MISUMI_POUT_SEI<br>BC_POUT_SEI<br>KNGCP_POUT_SEI<br>KNKY_POUT<br>AMZ_POUT<br>TSH_POUT", key3f:"N", key4:"Y", key4b:"Y", key4f:"N"},
+    ]},
+  ];
+
+  var feature_columns = [
+    {title:"スコープ", field:"", align:"left", width:250, cssClass:"dark bind", headerSort:false, formatter:function(cell) {
+      var data = cell.getRow().getData();
+      var closed = (data.closed == "Y") ? "（無効）" : "";
+      if (data.scope == "P") return "<span class='font property'>規定値 - " + $("#drpService").val() + "</span>";
+      if (data.scope == "A") return "<span class='font assign'>&nbsp;&nbsp;" + data.scope_code + "</span>";
+      if (data.scope == "B") return "<span class='font buyers'>&nbsp;&nbsp;&nbsp;&nbsp;" + data.scope_code + "</span>";
+      if (data.scope == "C") return "<span class='font customer'>&nbsp;&nbsp;" + data.scope_code + " " + data.scope_name + closed + "</span>";
+      if (data.scope == "S") return "<span class='font site'>&nbsp;&nbsp;" + data.scope_code + " " + data.scope_name + closed + "</span>";
+      if (data.scope == "U") return "<span class='font user'>&nbsp;&nbsp;&nbsp;&nbsp;" + data.scope_code + closed + "</span>";
+    }},
+    {title:"", field:"", align:"center", width:70, cssClass:"dark", headerSort:false, formatter:function(cell) {
+      var data = cell.getRow().getData();
+      var closed = (data.closed == "Y") ? "closed" : "";
+      if (data.scope == "P") return "";
+      if (data.scope == "A") return "";
+      if (data.closed == "Y") {
+        return "<button type='button' class='btn edit closed'>編集</button>";
+      } else {
+        return "<button type='button' class='btn edit' onclick='window.open(\"http://localhost:3000/feature_edit/index?scope=" + data.scope + "&scope_code=" + data.scope_code + "\", \"AFM-FeatureEdit\");'>編集</button>";
+      }
+    }},
+    {title:"ENDECA新規登録", columns:[
+      {title:"検索/検索エンジンURL<button type='button' class='btn info' onclick='javascript:open_feature_info_dialog(\"catalog.apf.url\")'>詳細</button><br>catalog.apf.url", field:"key1", align:"left", width:300, headerSort:false, formatter:function(cell) {
+        var data = cell.getRow().getData();
+        if (data.key1 != data.key1b) return "<span class='font edited'>" + data.key1 + "</span>";
+        return data.key1f == "Y" ? data.key1 : "<span class='font notset'>" + data.key1 + "</span>";
+      }},
+      {title:"見積/サイトグループ<button type='button' class='btn info' onclick='javascript:open_feature_info_dialog(\"organization.siteGroupCode\")'>詳細</button><br>organization.siteGroupCode", field:"key2", align:"left", width:300, headerSort:false, formatter:function(cell) {
+        var data = cell.getRow().getData();
+        if (data.key2 != data.key2b) return "<span class='font edited'>" + data.key2 + "</span>";
+        return data.key2f == "Y" ? data.key2 : "<span class='font notset'>" + data.key2 + "</span>";
+      }},
+      {title:"パンチアウト接続先リスト<button type='button' class='btn info' onclick='javascript:open_feature_info_dialog(\"opoutAllowCatalogList\")'>詳細</button><br>opoutAllowCatalogList", field:"key3", align:"left", width:300, headerSort:false, formatter:function(cell) {
+        var data = cell.getRow().getData();
+        if (data.key3 != data.key3b) return "<span class='font edited'>" + data.key3 + "</span>";
+        return data.key3f == "Y" ? data.key3 : "<span class='font notset'>" + data.key3 + "</span>";
+      }},
+      {title:"発注/お気に入り<button type='button' class='btn info' onclick='javascript:open_feature_info_dialog(\"favorite\")'>詳細</button><br>favorite", field:"key4", align:"left", width:300, formatter:"html", headerSort:false, formatter:function(cell) {
+        var data = cell.getRow().getData();
+        if (data.key4 != data.key4b) return "<span class='font edited'>" + data.key4 + "</span>";
+        return data.key4f == "Y" ? data.key4 : "<span class='font notset'>" + data.key4 + "</span>";
+      }},
+    ]},
+  ];
+
+  var table;
+  var create_table = function() {
+    table = new Tabulator("#feature-table", {
+      data: feature_data,
+      columns: feature_columns,
+      tooltips: true,
+      dataTree: true,
+      dataTreeChildIndent: 13,
+      selectable: false,
+    });
+  };
+
+  var search_feature_list = function() {
+    $(".operation").removeClass("invisible");
+    create_table();
+  }
+
+  var add_column = function() {
+    var target_group = "ENDECA新規登録";
+    var new_column = {title:"新カラム<br>new column", field:"", align:"left", width:300, formatter:"html", headerSort:false}
+    $.each(feature_columns, function(index, data) {
+      if (data.title == target_group) {
+        data.columns.push(new_column);
+      }
+    })
+    create_table();
+  }
+
+  var open_request_dialog = function() {
+    window.open("/feature_request/show", "AFM-FeatureRequest");
+  }
+
+  var open_feature_info_dialog = function(key) {
+    window.open("/feature_info/index?key=" + key, "AFM-FeatureInfo");
+  }
+
+  $(function() {
+  });
+</script>
+
+<!-- header -->
+<%= render "shared/header" %>
+
+<!-- container-fluid -->
+<div class="container-fluid">
+
+<!-- subject -->
+<div class="subject">
+  <div class="row">
+    <p class="h1">機能パラメータ一覧</p>
+  </div>
+</div>
+
+<!-- search area -->
+<div class="search">
+  <div class="row">
+    <div class="col-5 py-1">
+      <div style="height:4px"></div>
+      <div class="form-group">
+      <label for="txtBuyersGroup">バイヤーズグループ</label>
+      <input type="text" class="form-control form-control-sm required" id="txtBuyersGroup">
+      </div>
+      <div class="form-group">
+      <label for="txtCustomer">バイヤ</label>
+      <input type="text" class="form-control form-control-sm" id="txtCustomer">
+      </div>
+      <div class="form-group">
+      <label for="txtCustomerSite">事業所</label>
+      <input type="text" class="form-control form-control-sm" id="txtCustomerSite">
+      </div>
+    </div>
+    <div class="col-5 py-2">
+      <div class="form-group">
+      <label for="drpFeatureGroupPattern">機能グループパターン</label>
+      <select class="form-control form-control-sm" id="drpFeatureGroupPattern">
+      <option>全て</option>
+      </select>
+      </div>
+      <div class="form-group">
+      <label for="drpFeatureGroup">機能グループ</label>
+      <select class="form-control form-control-sm" id="drpFeatureGroup">
+      <option>全て</option>
+      <option>ENDECA新規設定</option>
+      <option>SPパンチアウト利用設定</option>
+      <option>新規事業所追加設定</option>
+      </select>
+      </div>
+      <div class="form-group">
+      <label for="drpService">規定値の参照先</label>
+      <select class="form-control form-control-sm" id="drpService">
+      <option>APMRO（本番環境）</option>
+      <option>EGRIP（本番環境）</option>
+      <option>APMRO（プレビュー環境）</option>
+      <option>EGRIP（プレビュー環境）</option>
+      </select>
+      </div>
+    </div>
+    <div class="col-1 py-3">
+      <div style="height:145px"></div>
+      <button type="button" class="btn btn-outline-primary" id="btnSearch" onclick="javascript: search_feature_list();">検索</button>
+    </div>
+  </div>
+</div>
+
+<!-- operation area -->
+<div class="operation invisible">
+  <div class="row">
+	  <div class="col-auto ml-sm-auto">
+    <div class="custom-control custom-checkbox">
+      <input type="checkbox" class="custom-control-input" id="chkShowClosedSite">
+      <label class="custom-control-label" for="chkShowClosedSite">無効な事業所を表示</label>&nbsp;&nbsp;&nbsp;&nbsp;
+      <button type="button" class="btn btn-outline-primary" onclick="javascript: download_csv();">CSVダウンロード</button>
+      <button type="button" class="btn btn-outline-primary" onclick="javascript: add_column();">列追加</button>
+      <button type="button" class="btn btn-outline-primary" onclick="javascript: open_request_dialog();">設定依頼</button>
+    </div>
+	  </div>
+  </div>
+</div>
+
+<!-- list area -->
+<div class="list">
+  <div class="row">
+    <div id="feature-table"></div>
+  </div>
+</div>
+
+</div>
+<!-- /container-fluid -->
+
+<!-- footer -->
+<%= render "shared/footer" %>

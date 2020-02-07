@@ -1,0 +1,146 @@
+.header {
+  background-color: #444;
+  margin: 0px 0px 15px 0px;
+  padding: 0px 10px;
+  height: 45px;
+}
+.header .logo {
+  font-family: 'Vidaloka', serif;
+  font-weight: bold;
+  color: aquamarine !important;
+  font-size: 35px;
+}
+.header .navi {
+  margin: 0px;
+  padding: 18px 30px 0px 0px;
+}
+.footer {
+  margin: 30px 10px 10px 10px;
+  padding: 0px;
+  font-size: 12px;
+}
+body.prod-release {
+  background-color: #fc3 !important;
+}
+button.prod-release {
+  background-color: #fc3 !important;
+}
+body.prod-rollback {
+  background-color: #9ae !important;
+}
+button.prod-rollback {
+  background-color: #9ae !important;
+}
+label {
+  margin-bottom: 0rem !important;
+}
+.tabulator .tabulator-header .tabulator-col {
+  background-color: #555;
+  color: #fff;
+  padding: 2px 0px;
+  font-size: 15px;
+  font-weight: normal;
+}
+.tabulator-cell {
+  margin: 0px;
+  padding: 7px 0px;
+  font-size: 15px;
+}
+.tabulator-cell .val {
+  height: auto;
+  min-height: 20px;
+}
+.btn {
+  border-radius: 8px;
+  background-color: white;
+  color: #555;
+  margin: 10px 5px;
+  padding: 5px 20px;
+  text-align: center;
+}
+.btn.sm {
+  border-radius: 6px;
+  margin: 0px;
+  padding: 2px 12px;
+  font-size: 16px;
+}
+.btn.ss {
+  border-radius: 6px;
+  margin: 0px;
+  padding: 0px 10px;
+  font-size: 14px;
+}
+.btn.info {
+  border-radius: 6px;
+  border-color: #fff;
+  background-color: #555;
+  color: magenta;
+  margin: 0px;
+  padding: 0px 7px;
+  font-size: 12px;
+  position: relative;
+  top: -2px;
+  left: 10px;
+}
+.date {
+  text-align: center !important;
+  font-size: 16px !important;
+  width: 160px !important;
+}
+.dark {
+  background-color: #555 !important;
+}
+.bind {
+  border-right: hidden !important;
+}
+.invisible {
+  display: none !important;
+  height: 0px !important;
+}
+.required {
+  background-color: yellow !important;
+}
+.font.accent {
+  color: red !important;
+}
+.font.property {
+  color: #aaa;
+}
+.font.assign {
+  color: #99f;
+}
+.font.buyers {
+  color: #0b7;
+}
+.font.customer {
+  color: #0de;
+}
+.font.site {
+  color: #fa0;
+}
+.font.user {
+  color: #e85;
+}
+.font.index {
+  color: aqua;
+  font-size: 16px;
+}
+.font.edited {
+  color: blue;
+}
+.font.notset {
+  color: #aaa;
+}
+.font.contain {
+  color: #666;
+  font-size: 14px;
+}
+.space {
+  height: 10px;
+}
+.space.s {
+  height: 5px;
+}
+.space.l {
+  height: 20px;
+}

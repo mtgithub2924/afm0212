@@ -1,0 +1,2 @@
+class ApScopedFeature < PreviewRecord
+end

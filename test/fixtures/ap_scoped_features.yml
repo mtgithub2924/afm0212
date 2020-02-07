@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  features_id: 1
+  features_type: MyString
+  scope_key: MyString
+  scope_value: MyString
+  value: MyString
+
+two:
+  features_id: 1
+  features_type: MyString
+  scope_key: MyString
+  scope_value: MyString
+  value: MyString

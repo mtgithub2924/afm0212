@@ -1,0 +1,2 @@
+class FmgFeature < ApplicationRecord
+end

@@ -1,0 +1,3 @@
+class ZnCusCustomer < PreviewRecord
+end
+

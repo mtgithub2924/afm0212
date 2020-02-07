@@ -1,0 +1,2 @@
+class ZnCusScopedFeature < PreviewRecord
+end

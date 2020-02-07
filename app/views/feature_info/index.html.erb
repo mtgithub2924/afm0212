@@ -1,0 +1,63 @@
+<style>
+  textarea {
+    background-color: #fff !important;
+  }
+  .container-fluid .subject {
+    margin: 10px 20px;
+    padding: 0px;
+  }
+  .container-fluid .info {
+    margin: 30px;
+    padding: 0px;
+    width: 1000px;
+  }
+</style>
+
+<script type="text/javascript">
+  $(function() {
+  });
+</script>
+
+<!-- container-fluid -->
+<div class="container-fluid">
+
+<!-- subject -->
+<div class="subject">
+  <div class="row">
+    <p class="h1">検索/同等品検索</p>
+    <div class="col-auto ml-sm-auto">
+    <button type="button" class="btn btn-outline-secondary" onclick="javascript: window.close();">閉じる</button>
+    </div>
+  </div>
+  <div class="row">
+    <p class="h3">（equivalent.search.enable）</p>
+  </div>
+</div>
+
+<!-- info area -->
+<div class="info">
+  <div class="row">
+    <div class="col-11 py-1">
+      <div class="form-group">
+      <label for="txtDescription">説明</label>
+      <textarea class="form-control" id="txtDescription" rows="3" readonly>Featureの説明、用途等</textarea>
+      </div>
+      <div class="form-group">
+      <label for="txtInputRule">入力規則</label>
+      <textarea class="form-control" id="txtInputRule" rows="3" readonly>文字列 or 数値 or Y/N</textarea>
+      </div>
+      <div class="form-group">
+      <label for="txtTestApproach">テスト方法</label>
+      <textarea class="form-control" id="txtTestApproach" rows="3" readonly>プレビュー環境でのテスト方法</textarea>
+      </div>
+      <div class="form-group">
+      <label for="txtCaution" class="font accent">注意事項</label>
+      <textarea class="form-control font accent" id="txtCaution" rows="3" readonly>Featureを設定する際の注意事項</textarea>
+      </div>
+    </div>
+  </div>
+  </form>
+</div>
+
+</div>
+<!-- /container-fluid -->

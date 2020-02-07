@@ -1,0 +1,11 @@
+<h1>FmgFeatures#show</h1>
+<p>Find me in app/views/fmg_features/show.html.erb</p>
+<p>
+<% @features.each do |feature| %>
+  feature key : <%= feature.feature_key %><br>
+  feature name : <%= feature.feature_name %><br>
+  description : <%= feature.description %><br>
+  editable : <%= feature.target_scope %><br>
+<% end %>
+</p>
+

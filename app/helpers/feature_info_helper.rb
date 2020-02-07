@@ -1,0 +1,2 @@
+module FeatureInfoHelper
+end

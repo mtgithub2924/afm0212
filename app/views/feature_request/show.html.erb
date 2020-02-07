@@ -1,0 +1,132 @@
+<style>
+  .tabulator .tabulator-header .tabulator-col {
+    padding: 10px 0px !important;
+  }
+  .container-fluid .subject {
+    margin: 10px 20px;
+    padding: 0px;
+  }
+  .container-fluid .input {
+    border: 2px solid #ccc;
+    margin: 40px 40px;
+    padding: 20px 0px 10px 50px;
+    width: 1000px;
+  }
+  .container-fluid .list {
+    margin: 0px 20px;
+    padding: 0px;
+  }
+</style>
+
+<script type="text/javascript">
+  var feature_data = [
+    {scope:"B", scope_code:"AJI001", scope_name:"", feature_key:"共通/メニュー（menuModule）", value_from:"CNSL", value_to:"CNSL_RICOH"},
+    {scope:"C", scope_code:"699999", scope_name:"APMRO株式会社", feature_key:"共通/メニュー（menuModule）", value_from:"CNSL", value_to:""},
+    {scope:"S", scope_code:"310026", scope_name:"三菱地所事業所", feature_key:"検索/検索エンジンURL（catalog.apf.url）", value_from:"feature:.exmg", value_to:"feature:.nexmg"},
+    {scope:"S", scope_code:"310033", scope_name:"味の素事業所", feature_key:"パンチアウト接続先リスト（opoutAllowCatalogList）", value_from:"MRZ_POUT<br>RS_POUT_SEI<br>C1S_POUT_SEI<br>MISUMI_POUT_SEI<br>BC_POUT_SEI<br>KNGCP_POUT_SEI<br>KNKY_POUT<br>AMZ_POUT<br>TSH_POUT", value_to:"MRZ_POUT<br>RS_POUT_SEI<br>C1S_POUT_SEI<br>MISUMI_POUT_SEI<br>BC_POUT_SEI<br>KNGCP_POUT_SEI<br>KNKY_POUT<br>AMZ_POUT_SEI<br>TSH_POUT_SEI"},
+    {scope:"U", scope_code:"GUEST-001", scope_name:"", feature_key:"発注/お気に入り（favorite）", value_from:"Y", value_to:"N"},
+  ];
+
+  var feature_columns = [
+    {title:"スコープ", field:"scope", align:"left", width:300, formatter:function(cell) {
+      var data = cell.getRow().getData();
+      if (data.scope == "B") return "<span class='font buyers'>バイヤーズグループ</span>&nbsp;&nbsp;" + data.scope_code;
+      if (data.scope == "C") return "<span class='font customer'>バイヤ</span>&nbsp;&nbsp;" + data.scope_code + " " + data.scope_name;
+      if (data.scope == "S") return "<span class='font site'>事業所</span>&nbsp;&nbsp;" + data.scope_code + " " + data.scope_name;
+      if (data.scope == "U") return "<span class='font user'>ユーザー</span>&nbsp;&nbsp;" + data.scope_code;
+    }},
+    {title:"機能パラメータキー", field:"feature_key", align:"left", width:400},
+    {title:"設定値（変更前）", field:"value_from", align:"left", width:300, formatter:function(cell) {
+      var data = cell.getRow().getData();
+      return data.value_from;
+    }},
+    {title:"設定値（変更後）", field:"value_to", align:"left", width:300, formatter:function(cell) {
+      var data = cell.getRow().getData();
+      return data.value_to;
+    }},
+  ];
+
+  var table;
+  var create_table = function() {
+    table = new Tabulator("#feature-table", {
+      data: feature_data,
+      columns: feature_columns,
+      tooltips: true,
+      selectable: false,
+    });
+  };
+
+  var send_request = function() {
+    if (confirm("機能パラメータの登録依頼を送信します。宜しいですか？")) {
+      window.close();
+    }
+  }
+
+  $(function() {
+    create_table();
+  });
+</script>
+
+<!-- container-fluid -->
+<div class="container-fluid">
+
+<!-- subject -->
+<div class="subject">
+  <div class="row">
+    <p class="h1">機能パラメータ登録依頼</p>
+    <div class="col-auto ml-sm-auto">
+    <button type="button" class="btn btn-outline-primary" onclick="javascript: send_request();">依頼送信</button>
+    <button type="button" class="btn btn-outline-secondary" onclick="javascript: window.close();">閉じる</button>
+    </div>
+  </div>
+</div>
+
+<!-- input area -->
+<div class="input">
+  <form id="frmInput" name="frmInput" method="post" action="" accept-charset="UTF-8">
+  <div class="row">
+    <div class="col-5 py-1">
+      <div style="height:4px"></div>
+      <div class="form-group">
+      <label for="txtUser">依頼者</label>
+      <input type="text" class="form-control form-control-sm" id="txtUser" value="田口" readonly>
+      </div>
+      <div class="form-group">
+      <label for="txtEmail">メールアドレス</label>
+      <input type="text" class="form-control form-control-sm" id="txtEmail" value="m.taguchi@atc-kk.jp">
+      </div>
+      <div class="form-group">
+      <label for="txtPrevDate">プレビュー反映日</label>
+      <div class="form-inline">
+      <input type="text" class="form-control form-control-sm date datepicker-here" data-timepicker="true" data-language="en" id="txtPrevDate">&nbsp;&nbsp;
+      <button type="button" class="btn sm btn-outline-info" onclick="javascript: set_current_datetime('txtPrevDate');">即時</button>
+      </div>
+      </div>
+    </div>
+    <div class="col-6 py-2">
+      <div class="form-group">
+      <label for="txtFeatureGroup">機能グループ</label>
+      <input type="text" class="form-control form-control-sm" id="txtFeatureGroup" value="ENDECA新規設定" readonly>
+      </div>
+      <div class="form-group">
+      <label for="txtBuyersGroup">バイヤーズグループ</label>
+      <input type="text" class="form-control form-control-sm" id="txtBuyersGroup" value="AJI001" readonly>
+      </div>
+      <div class="form-group">
+      <label for="txtComment">コメント</label>
+      <input type="text" class="form-control form-control-sm" id="txtComment">
+      </div>
+    </div>
+  </div>
+  </form>
+</div>
+
+<!-- list area -->
+<div class="list">
+  <div class="row">
+    <div id="feature-table"></div>
+  </div>
+</div>
+
+</div>
+<!-- /container-fluid -->

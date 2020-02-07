@@ -1,0 +1,2 @@
+class ZnCusCustomerSite < PreviewRecord
+end

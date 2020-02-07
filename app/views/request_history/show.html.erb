@@ -1,0 +1,207 @@
+<style>
+  .tabulator .tabulator-header .tabulator-col {
+    padding: 10px 0px !important;
+  }
+  .container-fluid .subject {
+    margin: 10px 20px;
+    padding: 0px;
+  }
+  .container-fluid .show-search {
+    margin: 20px 40px 0px 40px;
+    padding: 0px;
+  }
+  .container-fluid .search {
+    border: 2px solid #ccc;
+    margin: 0px 40px 40px 40px;
+    padding: 20px 0px 10px 50px;
+    width: 1000px;
+  }
+  .container-fluid .list {
+    margin: 10px 20px;
+    padding: 0px;
+  }
+</style>
+
+<script type="text/javascript">
+  var request_data = [
+    {req_id:"1840399", req_dt:"2020/01/19 11:30", req_usr:"田口", sts:"request", prv_dt:"2020/02/21 14:20", prd_dt:"", prd_usr:"", cmt:"SPパンチアウト設定追加"},
+    {req_id:"1840398", req_dt:"2020/01/15 15:20", req_usr:"田口", sts:"request", prv_dt:"2020/02/17 19:30", prd_dt:"2020/02/22 23:00", prd_usr:"", cmt:"ENDECA利用設定"},
+    {req_id:"1840397", req_dt:"2020/01/13 19:30", req_usr:"田口", sts:"prev_released", prv_dt:"2020/01/15 17:10", prd_dt:"2020/02/18 23:00", prd_usr:"", cmt:"BPO版受入DLツール ユーザー追加"},
+    {req_id:"1840396", req_dt:"2020/01/09 10:40", req_usr:"田口", sts:"prod_released", prv_dt:"2020/01/10 14:30", prd_dt:"2020/01/15 23:00", prd_usr:"上長太郎", cmt:"ENDECA利用設定"},
+    {req_id:"1840395", req_dt:"2019/12/21 17:10", req_usr:"田口", sts:"prod_released", prv_dt:"2019/12/22 16:30", prd_dt:"2019/12/25 23:00", prd_usr:"上長太郎", cmt:"SPパンチアウト設定追加"},
+    {req_id:"1840394", req_dt:"2019/12/11 20:20", req_usr:"田口", sts:"prod_released", prv_dt:"2019/12/16 14:30", prd_dt:"2019/12/20 23:00", prd_usr:"上長太郎", cmt:"リコー納入場所コード紐付設定"},
+    {req_id:"1840393", req_dt:"2019/11/29 09:50", req_usr:"田口", sts:"rollback", prv_dt:"2019/11/30 13:20", prd_dt:"2019/12/10 23:00", prd_usr:"上長太郎", cmt:"SPパンチアウト設定追加"},
+    {req_id:"1840392", req_dt:"2019/11/05 13:30", req_usr:"田口", sts:"canceled", prv_dt:"2019/11/07 14:50", prd_dt:"", prd_usr:"", cmt:"東洋紡お知らせ機能利用設定"},
+    {req_id:"1840391", req_dt:"2019/10/20 14:10", req_usr:"田口", sts:"prod_released", prv_dt:"2019/10/23 18:00", prd_dt:"2019/10/28 23:00", prd_usr:"上長太郎", cmt:"リコー納入場所コード紐付設定"},
+  ];
+
+  var request_columns = [
+    {title:"依頼ID", field:"req_id", align:"left", width:100, formatter:function(cell) {
+      var data = cell.getRow().getData();
+      var request_id = data.req_id;
+      var status = data.sts;
+      return "<a href='javascript:void(0)' class='link' onclick='window.open(\"/request_detail/index?id=" + request_id + "&status=" + status + "\", \"AFM-RequestDetail\");'>" + request_id + "</a>";
+    }},
+    {title:"依頼日", field:"req_dt", align:"left", width:160},
+    {title:"依頼者", field:"req_usr", align:"left", width:120},
+    {title:"ステータス", field:"sts_nm", align:"left", width:160, formatter:function(cell) {
+      var data = cell.getRow().getData();
+      var status = data.sts;
+      if (status == "request") return "依頼中";
+      if (status == "prev_released") return "プレビュー反映済";
+      if (status == "prod_released") return "本番反映済";
+      if (status == "canceled") return "依頼取消済";
+      if (status == "rollback") return "本番切り戻し済";
+    }},
+    {title:"プレビュー反映日", field:"prv_dt", align:"left", width:160, formatter:function(cell) {
+      var data = cell.getRow().getData();
+      var status = data.sts;
+      var prev_release_date = data.prv_dt;
+      if (status == "request") {
+        return "<span class='font notset'>" + prev_release_date + "</span>";
+      } else {
+        return prev_release_date;
+      }
+    }},
+    {title:"本番反映日", field:"prd_dt", align:"left", width:160, formatter:function(cell) {
+      var data = cell.getRow().getData();
+      var status = data.sts;
+      var prod_release_date = data.prd_dt;
+      if (status == "request" || status == "prev_released" || status == "canceled") {
+        return "<span class='font notset'>" + prod_release_date + "</span>";
+      } else {
+        return prod_release_date;
+      }
+    }},
+    {title:"本番反映者", field:"prd_usr", align:"left", width:120},
+    {title:"コメント", field:"cmt", align:"left", width:450},
+  ];
+
+  var table;
+  var create_table = function() {
+    table = new Tabulator("#request-table", {
+      data: request_data,
+      columns: request_columns,
+      tooltips: true,
+      selectable: false,
+    });
+  };
+
+  var initialize = function() {
+    $("#chkShowSearch").click(function(){
+      if ($(this).prop("checked")) {
+        $("#searchArea").removeClass("invisible");
+      } else {
+        $("#searchArea").addClass("invisible");
+      }
+    });
+    $("#chkAllStatus").click(function() {
+      $(".status").prop("checked", $(this).prop("checked"));
+    });
+  };
+
+  $(function() {
+    initialize();
+    create_table();
+  });
+</script>
+
+<!-- header -->
+<%= render "shared/header" %>
+
+<!-- container-fluid -->
+<div class="container-fluid">
+
+<!-- subject -->
+<div class="subject">
+  <div class="row">
+    <p class="h1">依頼履歴</p>
+  </div>
+</div>
+
+<!-- show search checkbox -->
+<div class="show-search">
+  <div class="custom-control custom-checkbox">
+  <input type="checkbox" class="custom-control-input" id="chkShowSearch">
+  <label class="custom-control-label" for="chkShowSearch">検索条件</label>
+  </div>
+</div>
+
+<!-- search area -->
+<div class="search invisible" id="searchArea">
+  <form id="frmSearch" name="frmSearch" method="get" action="/request_history/show" accept-charset="UTF-8">
+  <div class="row">
+    <div class="col-10 py-1">
+      <div class="form-group">
+      <label for="txtRequestDate">依頼日<span style="margin-left:325px">依頼者</span><span style="margin-left:185px">依頼ID</span></label>
+      <div class="form-inline">
+      <input type="text" class="form-control form-control-sm date required datepicker-here" data-timepicker="false" data-language="en" id="txtRequstDateFrom" value="2019/11/05">&nbsp;－&nbsp;
+      <input type="text" class="form-control form-control-sm date required datepicker-here" data-timepicker="false" data-language="en" id="txtRequestDateTo" value="2020/02/05">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <input type="text" class="form-control form-control-sm" id="txtRequestUser" style="width:160px" value="田口">&nbsp;<span class="font contain">を含む</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <input type="text" class="form-control form-control-sm" id="txtRequestId" style="width:160px">
+      </div>
+      </div>
+      <div class="form-group">
+      <label for="txtReleaseDate">本番反映日<span style="margin-left:293px">本番反映者</span></label>
+      <div class="form-inline">
+      <input type="text" class="form-control form-control-sm date datepicker-here" data-timepicker="false" data-language="en" id="txtReleaseDateFrom">&nbsp;－&nbsp;
+      <input type="text" class="form-control form-control-sm date datepicker-here" data-timepicker="false" data-language="en" id="txtReleaseDateTo">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <input type="text" class="form-control form-control-sm" id="txtReleaseUser" style="width:160px" value="">&nbsp;<span class="font contain">を含む</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </div>
+      </div>
+      <div class="form-group">
+      <label for="txtComment">コメント</label>
+      <div class="form-inline">
+      <input type="text" class="form-control form-control-sm" id="txtComment" style="width:600px">&nbsp;<span class="font contain">を含む</span>
+      </div>
+      </div>
+      <div class="form-group">
+      <label for="chkStatus">ステータス</label>
+      <div class="form-inline">
+      <div class="custom-control custom-checkbox">
+      <input type="checkbox" class="custom-control-input status" id="chkAllStatus" checked>
+      <label class="custom-control-label" for="chkAllStatus">全て　</label>
+      </div>
+      <div class="custom-control custom-checkbox">
+      <input type="checkbox" class="custom-control-input status" id="chkRequestStatus" checked>
+      <label class="custom-control-label" for="chkRequestStatus">依頼中　</label>
+      </div>
+      <div class="custom-control custom-checkbox">
+      <input type="checkbox" class="custom-control-input status" id="chkPrevReleasedStatus" checked>
+      <label class="custom-control-label" for="chkPrevReleasedStatus">プレビュー反映済　</label>
+      </div>
+      <div class="custom-control custom-checkbox">
+      <input type="checkbox" class="custom-control-input status" id="chkProdReleasedStatus" checked>
+      <label class="custom-control-label" for="chkProdReleasedStatus">本番反映済　</label>
+      </div>
+      <div class="custom-control custom-checkbox">
+      <input type="checkbox" class="custom-control-input status" id="chkCanceledStatus" checked>
+      <label class="custom-control-label" for="chkCanceledStatus">依頼取消済　</label>
+      </div>
+      <div class="custom-control custom-checkbox">
+      <input type="checkbox" class="custom-control-input status" id="chkRollbackStatus" checked>
+      <label class="custom-control-label" for="chkRollbackStatus">本番切り戻し済</label>
+      </div>
+      </div>
+      </div>
+    </div>
+    <div class="col-1 py-2">
+    <div style="height:220px"></div>
+    <button id="btnSearch" class="btn btn-outline-primary">検索</button>
+    </div>
+  </div>
+  </form>
+</div>
+
+<!-- list area -->
+<div class="list">
+  <div class="row">
+    <div id="request-table"></div>
+  </div>
+</div>
+
+</div>
+<!-- /container-fluid -->
+
+<!-- footer -->
+<%= render "shared/footer" %>
