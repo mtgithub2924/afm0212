@@ -23,36 +23,38 @@
     padding: 0px;
   }
   .container-fluid .list {
-    margin: 0px 20px;
+    margin: 0px 20px 10px 20px;
     padding: 0px;
   }
 </style>
 
 <script type="text/javascript">
   var feature_data = [
-    {scope:"B", scope_code:"AJI001", scope_name:"", feature_key:"共通/メニュー（menuModule）", value_from:"CNSL", value_to:"CNSL_RICOH", value_now:"CNSL_RICOH"},
-    {scope:"C", scope_code:"699999", scope_name:"APMRO株式会社", feature_key:"共通/メニュー（menuModule）", value_from:"CNSL", value_to:"", value_now:""},
-    {scope:"S", scope_code:"310026", scope_name:"三菱地所事業所", feature_key:"検索/検索エンジンURL（catalog.apf.url）", value_from:"feature:.exmg", value_to:"feature:.nexmg", value_now:"feature:.oexmg"},
-    {scope:"S", scope_code:"310033", scope_name:"味の素事業所", feature_key:"発注/お気に入り（favorite）", value_from:"MRZ_POUT<br>RS_POUT_SEI<br>C1S_POUT_SEI<br>MISUMI_POUT_SEI<br>BC_POUT_SEI<br>KNGCP_POUT_SEI<br>KNKY_POUT<br>AMZ_POUT<br>TSH_POUT", value_to:"MRZ_POUT<br>RS_POUT_SEI<br>C1S_POUT_SEI<br>MISUMI_POUT_SEI<br>BC_POUT_SEI<br>KNGCP_POUT_SEI<br>KNKY_POUT<br>AMZ_POUT_SEI<br>TSH_POUT_SEI", value_now:"MRZ_POUT<br>RS_POUT_SEI<br>C1S_POUT_SEI<br>MISUMI_POUT_SEI<br>BC_POUT_SEI<br>KNGCP_POUT_SEI<br>KNKY_POUT<br>AMZ_POUT_SEI<br>TSH_POUT_SEI"},
-    {scope:"U", scope_code:"GUEST-001", scope_name:"", feature_key:"発注/お気に入り（favorite）", value_from:"Y", value_to:"N", value_now:"Y"},
+    {scope_type:"B", scope:"AJI001", feature_key:"共通/メニュー（menuModule）", value_from:"CNSL", value_to:"CNSL_RICOH", value_now:"CNSL_RICOH"},
+    {scope_type:"C", scope:"699999 APMRO株式会社", feature_key:"共通/メニュー（menuModule）", value_from:"CNSL", value_to:"", value_now:""},
+    {scope_type:"S", scope:"310026 三菱地所事業所", feature_key:"検索/検索エンジンURL（catalog.apf.url）", value_from:"feature:.exmg", value_to:"feature:.nexmg", value_now:"feature:.oexmg"},
+    {scope_type:"S", scope:"310033 味の素事業所", feature_key:"発注/お気に入り（favorite）", value_from:"MRZ_POUT\nRS_POUT_SEI\nC1S_POUT_SEI\nMISUMI_POUT_SEI\nBC_POUT_SEI\nKNGCP_POUT_SEI\nKNKY_POUT\nAMZ_POUT\nTSH_POUT", value_to:"MRZ_POUT\nRS_POUT_SEI\nC1S_POUT_SEI\nMISUMI_POUT_SEI\nBC_POUT_SEI\nKNGCP_POUT_SEI\nKNKY_POUT\nAMZ_POUT\nTSH_POUT_SEI", value_now:"MRZ_POUT\nRS_POUT_SEI\nC1S_POUT_SEI\nMISUMI_POUT_SEI\nBC_POUT_SEI\nKNGCP_POUT_SEI\nKNKY_POUT\nAMZ_POUT\nTSH_POUT_SEI"},
+    {scope_type:"U", scope:"310033-GUEST-001", feature_key:"発注/お気に入り（favorite）", value_from:"Y", value_to:"N", value_now:"Y"},
   ];
 
   var feature_columns = [
     {title:"スコープ", field:"scope", align:"left", width:300, formatter:function(cell) {
       var data = cell.getRow().getData();
-      if (data.scope == "B") return "<span class='font buyers'>バイヤーズグループ</span>&nbsp;&nbsp;" + data.scope_code;
-      if (data.scope == "C") return "<span class='font customer'>バイヤ</span>&nbsp;&nbsp;" + data.scope_code + " " + data.scope_name;
-      if (data.scope == "S") return "<span class='font site'>事業所</span>&nbsp;&nbsp;" + data.scope_code + " " + data.scope_name;
-      if (data.scope == "U") return "<span class='font user'>ユーザー</span>&nbsp;&nbsp;" + data.scope_code;
+      if (data.scope_type == "B") return "<span class='font buyers'>バイヤーズグループ</span>&nbsp;&nbsp;" + data.scope;
+      if (data.scope_type == "C") return "<span class='font customer'>バイヤ</span>&nbsp;&nbsp;" + data.scope;
+      if (data.scope_type == "S") return "<span class='font site'>事業所</span>&nbsp;&nbsp;" + data.scope;
+      if (data.scope_type == "U") return "<span class='font user'>ユーザー</span>&nbsp;&nbsp;" + data.scope;
     }},
     {title:"機能パラメータキー", field:"feature_key", align:"left", width:400},
     {title:"設定値（変更前）", field:"value_from", align:"left", width:300, formatter:function(cell) {
       var data = cell.getRow().getData();
-      return data.value_from;
+      var value = data.value_from.replace(/\n/g, "<br>\n");
+      return "<div class='val'>" + value + "</div>";
     }},
     {title:"設定値（変更後）", field:"value_to", align:"left", width:300, formatter:function(cell) {
       var data = cell.getRow().getData();
-      return data.value_to;
+      var value = data.value_to.replace(/\n/g, "<br>\n");
+      return "<div class='val'>" + value + "</div>";
     }},
   ];
 
@@ -64,24 +66,28 @@
     }},
     {title:"スコープ", field:"scope", align:"left", width:300, formatter:function(cell) {
       var data = cell.getRow().getData();
-      if (data.scope == "B") return "<span class='font buyers'>バイヤーズグループ</span>&nbsp;&nbsp;" + data.scope_code;
-      if (data.scope == "C") return "<span class='font customer'>バイヤ</span>&nbsp;&nbsp;" + data.scope_code + " " + data.scope_name;
-      if (data.scope == "S") return "<span class='font site'>事業所</span>&nbsp;&nbsp;" + data.scope_code + " " + data.scope_name;
-      if (data.scope == "U") return "<span class='font user'>ユーザー</span>&nbsp;&nbsp;" + data.scope_code;
+      if (data.scope_type == "B") return "<span class='font buyers'>バイヤーズグループ</span>&nbsp;&nbsp;" + data.scope;
+      if (data.scope_type == "C") return "<span class='font customer'>バイヤ</span>&nbsp;&nbsp;" + data.scope;
+      if (data.scope_type == "S") return "<span class='font site'>事業所</span>&nbsp;&nbsp;" + data.scope;
+      if (data.scope_type == "U") return "<span class='font user'>ユーザー</span>&nbsp;&nbsp;" + data.scope;
     }},
     {title:"機能パラメータキー", field:"feature_key", align:"left", width:400},
     {title:"設定値（本番反映直前）", field:"value_from", align:"left", width:300, formatter:function(cell) {
       var data = cell.getRow().getData();
-      return data.value_from;
+      var value = data.value_from.replace(/\n/g, "<br>\n");
+      return "<div class='val'>" + value + "</div>";
     }},
     {title:"設定値（変更後）", field:"value_to", align:"left", width:300, formatter:function(cell) {
       var data = cell.getRow().getData();
-      return data.value_to;
+      var value = data.value_to.replace(/\n/g, "<br>\n");
+      return "<div class='val'>" + value + "</div>";
     }},
     {title:"設定値（現在）", field:"value_now", align:"left", width:300, formatter:function(cell) {
       var data = cell.getRow().getData();
-      var value_now = data.value_now;
-      return (data.value_to == data.value_now) ? value_now : "<span class='font accent'>" + value_now + "</span>";
+      var value_to = data.value_to.replace(/\n/g, "<br>\n");
+      var value_now = data.value_now.replace(/\n/g, "<br>\n");
+      var value = (value_to == value_now) ? value_now : "<span class='font accent'>" + value_now + "</span>";
+      return "<div class='val'>" + value + "</div>";
     }},
   ];
 
